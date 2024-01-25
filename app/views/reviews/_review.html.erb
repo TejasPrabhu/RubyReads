@@ -1,0 +1,15 @@
+<div>
+<div><%= "#{review.rating} / 5" %></div>
+<p><%= review.comment %></p>
+</div>
+
+<% if user_signed_in? %>
+  <% if is_admin or review.user_id == current_user.id %>
+  <div  class="btn-toolbar">
+    <%= link_to "Edit", edit_book_review_path(review.book, review), class: "btn btn-outline-secondary" %>
+    <%= button_to "Delete", book_review_path(review.book, review.id), method: :delete, class: "btn btn-outline-secondary" %>
+    <%# <%= link_to "Delete", book_review_path(review.book, review.id), method: :delete, class: "btn btn-outline-secondary" %>
+  </div>
+  <% end %>
+<% end %>
+

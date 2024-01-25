@@ -1,0 +1,8 @@
+<%= simple_form_for @book do |form| %>
+    <div class="mb-3"> <%= form.input :name, label: "Book Title" %> </div>
+    <div class="mb-3"> <%= form.input :author, label: "Book Author" %> </div>
+    <div class="mb-3"> <%= form.input :publisher, label: "Book Publisher" %> </div>
+    <div class="mb-3"> <%= form.input :price, label: "Book Price" %> </div>
+    <div class="mb-3"> <%= form.input :stock, label: "Available Copies" %> </div>
+    <div class="mb-3"> <%= form.button :submit, class:"btn btn-outline-secondary" %> </div>
+<% end %>

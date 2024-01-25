@@ -1,0 +1,54 @@
+
+
+<style>
+  .review-search, #new_review_search, .form-inputs, .form-actions {
+    display: flex;
+  }
+</style>
+
+<h1>Reviews</h1>
+
+<% if @hide_search %>
+<div class="review-search">
+  <%= simple_form_for(@search, url: reviews_path, method: :get) do |f| %>
+
+    <div class="form-inputs">
+      <%= f.input :user_name, required: false %>
+      <%= f.input :book_name, required: false%>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Search", class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+
+  <div>
+    <%= button_to "Reset", reviews_path, class: "btn btn-outline-secondary", method: :get %>
+  </div>
+
+</div>
+<% end %>
+
+
+<% if !@reviews.nil? %>
+  <table class="table table-striped table-hover">
+      <thead>
+          <tr>
+              <th>Title</th>
+              <th>Rating</th>
+              <th>Comment</th>
+              <th></th>
+          </tr>
+      </thead>
+      <tbody>
+      <% @reviews.each do |review| %>
+          <tr>
+              <td><%= link_to review.book.name, book_path(review.book) %></td>
+              <td><%= review.rating %></td>
+              <td><%= review.comment %></td>
+          </tr>
+      <% end %>
+      </tbody>
+  </table>
+<% end %>
+

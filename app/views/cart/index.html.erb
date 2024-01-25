@@ -1,0 +1,37 @@
+<h1>Cart</h1>
+<%= form_tag %>
+
+<table class="table table-striped table-hover">
+  <thead>
+  <tr>
+    <th>Book</th>
+    <th>Quantity</th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <% @cart_items.each do |item| %>
+  <tr>
+    <td>
+    <%= lookup_book(item.book_id).name %>
+    <%= hidden_field(:txn, :book_id, :readonly => true, :value => item.book_id, :multiple => true ) %></td>
+    <td><%= number_field(:txn, :quantity,  :value => item.quantity, :multiple => true ) %></td>
+    <td><%= link_to "Remove", remove_from_cart_path(id: item.book_id), method: :get %></td>
+  </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<label>Credit Card Number</label>
+<%= number_field(:txn, :credit_card_number,  :value => current_user.credit_card_number ) %>
+
+<label>Address</label>
+<%= text_field(:txn, :address,  :value => current_user.address ) %></td>
+
+<label>Phone Number</label>
+<%= text_field(:txn, :phone_number,  :value => current_user.phone_number) %></td>
+
+  <div class="form-actions">
+    <%= submit_tag "Submit", class: "btn btn-outline-secondary" %>
+    <%= link_to "Clear Cart", clear_cart_path, class: "btn btn-outline-secondary" %>
+  </div>

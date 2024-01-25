@@ -1,0 +1,24 @@
+<div class="h-100 p-5 border rounded-3">
+  <h2>Title: <%= @book.name %></h2>
+  <p>
+  <h4>Author: <%= @book.author %></h4>
+  <h5>Price: <%= @book.price %></h5>
+  <div>
+  <h5>Rating: <%= @average_review %> </h5>
+  <span>Based on <%= @book.reviews.count %> reviews</span>
+    </div>
+
+  <br>
+  <%= render @book.reviews %>
+    <hr>
+  <div class="btn-toolbar">
+    <%#= link_to "Back", root_path, class: "btn btn-outline-secondary" %>
+    <%= link_to "Add Review", new_book_review_path(@book), class: "btn btn-outline-secondary" %>
+    <% if user_signed_in? %>
+      <% if @book.user_id == current_user.id %>
+        <%= link_to "Edit Book", edit_book_path(@book), class: "btn btn-outline-secondary" %>
+        <%= button_to "Delete Book", @book, method: :delete, class: "btn btn-outline-secondary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>
